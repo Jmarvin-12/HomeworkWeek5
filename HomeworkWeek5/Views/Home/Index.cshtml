@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Tareas week 5";
+}
+
+<div class="Index-title text-center" style="color:white">
+    <h1 class="titulito">Welcome</h1>
+    <h4>Estas son las tareas desarrolladas en la semana 5 del curso de desarrollo Full Stack con C# ASP.Net</h4>
+</div>
+
+<br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-3"></div>
+        <form asp-controller="Home" asp-action="CreateThings" method="get">
+            <div class="col-3">
+                <input class="btn btn-primary" type="submit" value="Operaciones matemáticas y de crear objetos"/>
+            </div>
+        </form>
+        <form asp-controller="Home" asp-action="SortArray" method="get">
+            <div class="col-3">
+                <input class="btn btn-primary" type="submit" value="Reordenar un arreglo"/>
+            </div>
+            <div class="col-3"></div>
+        </form>
+    </div>
+</div>

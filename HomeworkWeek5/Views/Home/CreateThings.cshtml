@@ -1,0 +1,262 @@
+﻿
+@{
+    var ListPeople = ViewBag.personas;
+    var ListVehicles = ViewBag.vehicles;
+}
+
+<!-- aca comienza el selector-->
+<div id="opciones" class="row text-center">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <label style="position: relative; display: inline-block; font-size: 2rem; color: #0026ff; text-shadow: 3px 3px 0 #e7eef1, 8px 8px 0 rgba(0, 0, 0, 0.1);" id="etiqueta" class="label-control">Seleccione una operacion</label>
+        <select id="elegir" name="tipo" class="form-control">
+            <option value="0">Seleccione...</option>
+            <option value="1">Crear vehículo</option>
+            <option value="2">Calcular area de triángulo</option>
+        </select>
+    </div>
+    <div class="col-4"></div>
+</div>
+<!-- aca termina el selector-->
+<!-- aca comienza crear vehiculo -->
+
+<div id="vehiculo" class="container-op" style="display:none; background-color:lightblue; margin:auto">
+    <form asp-action="CreateVehicle" method="post">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <div class="header-op">
+                    <h1 class="tit">Crear Vehículo</h1>
+                </div>
+            </div>
+            <div class="col-2"></div>
+        </div>
+        <br />
+        <div class="row text-center" style="margin:-5px -5px">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <label class="label-control">Ingrese el modelo</label>
+                <input class="form-control" type="text" name="modelo" />
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <br />
+        <div class="row text-center" style="margin:-5px -5px">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <label class="label-control">Ingrese el año</label>
+                <input class="form-control" type="number" name="year" />
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <br />
+        <div class="row text-center" style="margin:-5px -5px">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <label class="label-control">Ingrese color</label>
+                <input class="form-control" type="text" name="color" />
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <br />
+        <div class="row text-center" style="margin:-5px -5px">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <label class="label-control">Ingrese el numero de llantas</label>
+                <input class="form-control" type="number" name="llantas" />
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4 text-center">
+                <input class="btn btn-info" type="submit" value="Crear vehículo" />
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </form>
+</div>
+
+<!--Comienza el area de un triangulo-->
+
+<div id="area" class="container-op" style="display:none">
+    <form asp-action="GetTriangleArea" method="post">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <div class="header-op">
+                    <h1 class="tit">Area de un triángulo</h1>
+                </div>
+            </div>
+            <div class="col-2"></div>
+        </div>
+        <br />
+        <div class="row text-center">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <label class="label-control">Ingrese la base del triángulo</label>
+                <input class="form-control" type="number" name="num1" />
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <br />
+        <div class="row text-center">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <label class="label-control">Ingrese la altura del triángulo</label>
+                <input class="form-control" type="number" name="num2" />
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4 text-center">
+                <input class="btn btn-info" type="submit" value="Sumar" />
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </form>
+</div>
+
+<!-- aca comienza resultados-->
+<div style="text-align:center">
+    <div id="resultadoVehiculo" class="text-center" style="background-color: #001631; border-radius: 30px 20px; color: #e7eef1; border-collapse: collapse; border: groove; text-align: center; position: relative; display: none">
+        <h1 class="tit">Lista de vehiculos</h1><br /><br />
+        <div class="row" style="margin: 10px; border: 1px solid; border-radius: 10px 10px;">
+            <div class="col-2">
+                <h4>ID: </h4>
+            </div>
+            <div class="col-2">
+                <h4>Modelo: </h4>
+            </div>
+            <div class="col-2">
+                <h4>Año: </h4>
+            </div>
+            <div class="col-2">
+                <h4>Color: </h4>
+            </div>
+            <div class="col-2">
+                <h4>Categoria: </h4>
+            </div>
+            <div class="col-2">
+                <h4>Fecha de creación: </h4>
+            </div>
+
+            @if (ListVehicles != null)
+            {
+                foreach (var a in ListVehicles)
+                {
+
+                    <div class="col-2" style="border: 0.5px solid; ">
+                        <label>@a.Id</label>
+                    </div>
+                    <div class="col-2" style="border: 0.5px solid; ">
+                        <label>@a.Model</label>
+                    </div>
+                    <div class="col-2" style="border: 0.5px solid; ">
+                        <label>@a.year</label>
+                    </div>
+                    <div class="col-2" style="border: 0.5px solid; ">
+                        <label>@a.color</label>
+                    </div>
+                    <div class="col-2" style="border: 0.5px solid; ">
+                        <label>@a.category</label>
+                    </div>
+                    <div class="col-2" style="border: 0.5px solid; ">
+                        <label>@a.EntryDate</label>
+                    </div>
+
+                }
+            }
+        </div>
+    </div>
+    <div id="resultadoarea" class="row" style="display: none">
+        <div class="col-12">
+            <div class="card text-center shadow">
+                <div style="background-color:darkblue" class="card-header">
+                    <h1 class="font-weight-bold font-italic tit">Area del triángulo</h1>
+                </div>
+                <div class="card-body">
+                    <label class="card-title">La área del triángulo es de:</label>
+                    <h2>@ViewBag.area</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <div id="btnreturn" class="row text-center" style="display: none">
+        <div class="col-12">
+            <a class="btn btn-primary shadow" asp-action="CreateThings">Volver a acciones</a>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- aca finaliza resultados-->
+<!-- aca inicia codigo js-->
+<script>
+    var suma = document.querySelector("#suma");
+    var elegir = document.querySelector("#elegir");
+    var vehiculo = document.querySelector("#vehiculo");
+    var area = document.querySelector("#area");
+    var resultadovehiculo = document.querySelector("#resultadoVehiculo");
+    var resultadoarea = document.querySelector("#resultadoarea");
+    var opciones = document.querySelector("#opciones");
+    var btnreturn = document.querySelector("#btnreturn");
+
+    elegir.onchange = function () {
+        if (elegir.value == 1) {
+            opciones.style.display = "none";
+            vehiculo.style.display = "block";
+        } else if (elegir.value == 2) {
+            opciones.style.display = "none";
+            area.style.display = "block";
+        }
+
+    }
+
+
+
+</script>
+
+<!-- aca finaliza codigo js-->
+
+
+@if (@ViewBag.mostrarVehiculo != null)
+{
+
+    <script>
+    window.onload = function() {
+
+        if (@ViewBag.mostrarVehiculo == 0) {
+            opciones.style.display = "none";
+            resultadovehiculo.style.display = "block";
+            btnreturn.style.display = "block";
+        }
+
+    }
+    </script>
+}
+
+@if (ViewBag.mostrararea != null)
+{
+
+    <script>
+        window.onload = function () {
+
+            if (@ViewBag.mostrararea == 0) {
+            opciones.style.display = "none";
+                resultadoarea.style.display = "block";
+                btnreturn.style.display = "block";
+             }
+            }
+    </script>
+
+}
+
+
